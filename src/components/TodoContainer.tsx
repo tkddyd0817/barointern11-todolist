@@ -33,14 +33,38 @@ const TodoContainer: FC<TodoContainerTypes> = ({ serverTodos }) => {
 
   
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-50">
-       <div className="bg-blue-200 rounded-lg border border-black-500 w-[800px] min-h-[600px] p-6 shadow-md">
-         <h1 className="text-2xl font-bold text-center mb-6">TodoList</h1>
-         <TodoInput/>
-         <TodoFilterTap filter={filter} setFilter={setFilter}/>
-         <TodoList todos={filteredTodos}/>
-        </div>
-        </div>
+    <div className="min-h-screen flex items-center justify-center bg-gray-50 p-4">
+  <div className="
+    bg-blue-200 
+    rounded-lg 
+    border 
+    border-black-500 
+    w-full                
+    max-w-[800px]         
+    min-h-[400px]         
+    sm:min-h-[600px]      
+    p-4                   
+    sm:p-6                
+    shadow-md
+    mx-auto               
+  ">
+    <h1 className="
+      text-xl             
+      sm:text-2xl         
+      font-bold 
+      text-center 
+      mb-4                
+      sm:mb-6              
+    ">
+      TodoList
+    </h1>
+    <div className="space-y-4 sm:space-y-6">
+      <TodoInput />
+      <TodoFilterTap filter={filter} setFilter={setFilter} />
+      <TodoList todos={filteredTodos} />
+    </div>
+  </div>
+</div>
   )
 }
 

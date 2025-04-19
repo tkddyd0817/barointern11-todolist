@@ -34,14 +34,46 @@ const TodoItem: FC<TodoItemTypes> = ({ todo }) => {
   };
 
   return (
-    <li className="flex items-start justify-between p-3 border border-black-500 rounded-lg">
-      <div className="flex w-full flex-col pr-2">
-        <div className="mb-1 flex items-center gap-3">
+    <li
+      className="
+    flex 
+    items-start 
+    justify-between 
+    p-2                
+    sm:p-3            
+    border 
+    border-black-500 
+    rounded-lg
+  "
+    >
+      <div
+        className="
+      flex 
+      w-full 
+      flex-col 
+      pr-1              
+      sm:pr-2           
+    "
+      >
+        <div
+          className="
+        mb-1 
+        flex 
+        items-center 
+        gap-2            
+        sm:gap-3         
+      "
+        >
           <input
             type="checkbox"
             checked={todo.completed}
             onChange={handleToggle}
-            className="w-5 h-5 accent-blue-500 cursor-pointer"
+            className="
+            w-4 h-4          
+            sm:w-5 sm:h-5   
+            accent-blue-500 
+            cursor-pointer
+          "
           />
           {isEditing ? (
             <input
@@ -50,37 +82,83 @@ const TodoItem: FC<TodoItemTypes> = ({ todo }) => {
               onChange={(e) => setEditText(e.target.value)}
               onKeyPress={handleKeyPress}
               onBlur={handleUpdate}
-              className="w-full p-1 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500"
+              className="
+              w-full 
+              p-1              
+              sm:p-2           
+              text-sm          
+              sm:text-base     
+              border 
+              rounded 
+              focus:outline-none 
+              focus:ring-2 
+              focus:ring-blue-500
+            "
               autoFocus
             />
           ) : (
             <span
-              className={`break-all  ${
-                todo.completed ? "text-gray-400 line-through" : "text-gray-700"
-              }`}
+              className={`
+            break-all
+            text-sm          
+            sm:text-base     
+            ${todo.completed ? "text-gray-400 line-through" : "text-gray-700"}
+          `}
             >
               {todo.title}
             </span>
           )}
         </div>
-        <span className="ml-7 break-all text-sm text-black-500">
+        <span
+          className="
+        ml-6              
+        sm:ml-7           
+        break-all 
+        text-xs         
+        sm:text-sm       
+        text-black-500
+      "
+        >
           {todo.date}
         </span>
       </div>
-      <div className="flex gap-2">
+      <div
+        className="
+      flex 
+      gap-1            
+      sm:gap-2          
+    "
+      >
         <button
           type="button"
           onClick={() => setIsEditing(true)}
-          className="px-3 py-1 text-sm border border-black-500 rounded-lg hover:bg-gray-100"
+          className="
+          px-2 py-1        
+          sm:px-3 sm:py-1  
+          text-sm 
+          border 
+          border-black-500 
+          rounded-lg 
+          hover:bg-gray-100
+        "
         >
-          <PenTool size={20} />
+          <PenTool size={16} className="sm:w-5 sm:h-5" />
         </button>
         <button
           type="button"
           onClick={handleDelete}
-          className="px-3 py-1 text-sm border border-red-300 text-red-500 rounded-lg hover:bg-red-50"
+          className="
+          px-2 py-1        
+          sm:px-3 sm:py-1  
+          text-sm 
+          border 
+          border-red-300 
+          text-red-500 
+          rounded-lg 
+          hover:bg-red-50
+        "
         >
-          <Trash2 size={20} className="text-red-500" />
+          <Trash2 size={16} className="sm:w-5 sm:h-5 text-red-500" />
         </button>
       </div>
     </li>
