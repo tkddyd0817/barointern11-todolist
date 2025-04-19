@@ -1,6 +1,6 @@
 'use client';
 
-import { HydrationBoundary, QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { dehydrate, HydrationBoundary, QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { useState } from "react";
 
 export default function TodoQueryProviders({ children }: { children: React.ReactNode }) {
@@ -15,7 +15,7 @@ export default function TodoQueryProviders({ children }: { children: React.React
 
   return (
     <QueryClientProvider client={queryClient}>
-      <HydrationBoundary>
+      <HydrationBoundary state={dehydrate(queryClient)} >
       {children}
       </HydrationBoundary>
     </QueryClientProvider>
