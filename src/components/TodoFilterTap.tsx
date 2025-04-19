@@ -1,20 +1,22 @@
-import { CheckSquare, List } from 'lucide-react';
-import { FC } from 'react';
+import { CheckSquare, List } from "lucide-react";
+import { FC } from "react";
 
-import { TodoFilterTapsTypes } from '@/types/TodoTypes';
+import { TodoFilterTapsTypes } from "@/types/TodoTypes";
 
 const TodoFilterTabs: FC<TodoFilterTapsTypes> = ({ filter, setFilter }) => {
   return (
-    <div className="
+    <div
+      className="
     mb-4 
     flex 
     justify-center        
     gap-2              
     sm:gap-3           
-  ">
-    <button
-      onClick={() => setFilter('ALL')}
-      className={`
+  "
+    >
+      <button
+        onClick={() => setFilter("ALL")}
+        className={`
         rounded-lg 
         px-2 py-2        
         sm:px-4 sm:py-3  
@@ -22,33 +24,37 @@ const TodoFilterTabs: FC<TodoFilterTapsTypes> = ({ filter, setFilter }) => {
         sm:min-w-[100px] 
         transition-colors
         ${
-          filter === 'ALL'
-            ? 'bg-blue-600 text-white'
-            : 'bg-gray-200 text-gray-800 hover:bg-blue-100 hover:text-blue-800'
+          filter === "ALL"
+            ? "bg-blue-600 text-white"
+            : "bg-gray-200 text-gray-800 hover:bg-blue-100 hover:text-blue-800"
         }
       `}
-    >
-      <span className="
+      >
+        <span
+          className="
         hidden 
         sm:inline 
         text-sm        
         lg:text-base   
-      ">
-        모든 할 일
-      </span>
-      <span className="
+      "
+        >
+          모든 할 일
+        </span>
+        <span
+          className="
         sm:hidden
         flex 
         items-center 
         justify-center
-      ">
-        <List size={18} />  
-      </span>
-    </button>
-  
-    <button
-      onClick={() => setFilter('COMPLETED')}
-      className={`
+      "
+        >
+          <List size={18} />
+        </span>
+      </button>
+
+      <button
+        onClick={() => setFilter("COMPLETED")}
+        className={`
         rounded-lg 
         px-2 py-2        
         sm:px-4 sm:py-3  
@@ -56,35 +62,35 @@ const TodoFilterTabs: FC<TodoFilterTapsTypes> = ({ filter, setFilter }) => {
         sm:min-w-[100px] 
         transition-colors
         ${
-          filter === 'COMPLETED'
-            ? 'bg-blue-600 text-white'
-            : 'bg-gray-200 text-gray-800 hover:bg-blue-100 hover:text-blue-800'
+          filter === "COMPLETED"
+            ? "bg-blue-600 text-white"
+            : "bg-gray-200 text-gray-800 hover:bg-blue-100 hover:text-blue-800"
         }
       `}
-    >
-      <span className="
+      >
+        <span
+          className="
         hidden 
         sm:inline 
         text-sm       
         lg:text-base   
-      ">
-        완료된 일
-      </span>
-      <span className="
+      "
+        >
+          완료된 일
+        </span>
+        <span
+          className="
         sm:hidden
         flex 
         items-center 
         justify-center
-      ">
-        <CheckSquare size={18} />  
-      </span>
-    </button>
-  </div>
+      "
+        >
+          <CheckSquare size={18} />
+        </span>
+      </button>
+    </div>
   );
 };
 
 export default TodoFilterTabs;
-
-
-
-

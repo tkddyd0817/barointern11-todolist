@@ -1,11 +1,12 @@
-import { FC } from 'react';
-import { TodoListTypes } from '@/types/TodoTypes';
+import { FC } from "react";
+import { TodoListTypes } from "@/types/TodoTypes";
 
-import TodoItem from './TodoItem';
+import TodoItem from "./TodoItem";
 
 const TodoList: FC<TodoListTypes> = ({ todos }) => {
   return (
-    <ul className="
+    <ul
+      className="
     mt-3                
     sm:mt-4             
     space-y-2          
@@ -17,17 +18,15 @@ const TodoList: FC<TodoListTypes> = ({ todos }) => {
     sm:px-2            
     -mx-1             
     sm:-mx-2          
-  ">
-    {todos
-      .slice()
-      .reverse()
-      .map((todo) => (
-        <TodoItem 
-          key={todo.id} 
-          todo={todo} 
-        />
-      ))}
-  </ul>
+  "
+    >
+      {todos
+        .slice()
+        .reverse()
+        .map((todo) => (
+          <TodoItem key={todo.id} todo={todo} />
+        ))}
+    </ul>
   );
 };
 
