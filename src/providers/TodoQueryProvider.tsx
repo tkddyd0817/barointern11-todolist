@@ -7,7 +7,7 @@ export default function TodoQueryProviders({ children }: { children: React.React
   const [queryClient] = useState(() => new QueryClient({
     defaultOptions: {
       queries: {
-        staleTime: 60 * 1000, // 1분
+        staleTime: 60 * 1000, 
         retry: 1,
       },
     },
@@ -15,7 +15,7 @@ export default function TodoQueryProviders({ children }: { children: React.React
 
   return (
     <QueryClientProvider client={queryClient}>
-      <HydrationBoundary state={dehydrate(queryClient)} >
+      <HydrationBoundary state={dehydrate(queryClient)} >    {/* HydrationBoundary  적용 */}
       {children}
       </HydrationBoundary>
     </QueryClientProvider>

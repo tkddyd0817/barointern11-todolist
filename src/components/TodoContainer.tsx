@@ -1,4 +1,5 @@
 "use client";
+
 import TodoFilterTap from "@/components/TodoFilterTap";
 import TodoInput from "@/components/TodoInput";
 import TodoList from "@/components/TodoList";
@@ -22,8 +23,8 @@ const TodoContainer: FC<TodoContainerTypes> = ({ serverTodos }) => {
       </div>
     );
 
-    const remaining = todos.filter((t) => !t.completed).length;
-    const completed = todos.filter((t) => t.completed).length;
+  const remaining = todos.filter((t) => !t.completed).length;
+  const completed = todos.filter((t) => t.completed).length;
 
   const filteredTodos = todos.filter((todo) => {
     if (filter === "ALL") {
@@ -64,17 +65,16 @@ const TodoContainer: FC<TodoContainerTypes> = ({ serverTodos }) => {
           TodoList
         </h1>
         <div className="space-y-4 sm:space-y-6">
-
-           {/* 새 할 일 입력 */}
+          {/* 새 할 일 입력 */}
           <TodoInput />
 
-{/* 할 일 상태 표시 */}
+          {/* 할 일 상태 표시 */}
           <TodoStatus remaining={remaining} completed={completed} />
 
           {/* 필터 탭 */}
           <TodoFilterTap filter={filter} setFilter={setFilter} />
-         
-           {/* 할 일 목록 */}
+
+          {/* 할 일 목록 */}
           <TodoList todos={filteredTodos} />
         </div>
       </div>
