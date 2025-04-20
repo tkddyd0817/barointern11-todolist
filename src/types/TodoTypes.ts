@@ -37,10 +37,10 @@ export type UseTodosParams = {
 
 
 
-//   export type TodoStatusTypes = {
-//     remaining: number;
-//     completed: number;
-//   };
+  export type TodoStatusTypes = {
+    remaining: number;
+    completed: number;
+  };
 
 export type TodoFilterTapsTypes = {
     filter:"ALL" | "COMPLETED",

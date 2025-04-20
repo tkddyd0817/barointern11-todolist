@@ -6,6 +6,7 @@ import Loading from "@/components/Loading";
 import { useTodos } from "@/hooks/UseTodos";
 import { TodoContainerTypes } from "@/types/TodoTypes";
 import React, { FC, useState } from "react";
+import TodoStatus from "@/components/TodoStatus";
 
 const TodoContainer: FC<TodoContainerTypes> = ({ serverTodos }) => {
   const { todos, isLoading, isError, error } = useTodos({
@@ -20,6 +21,9 @@ const TodoContainer: FC<TodoContainerTypes> = ({ serverTodos }) => {
         리스트를 가져오는 중 에러가 발생했습니다: {(error as Error).message}
       </div>
     );
+
+    const remaining = todos.filter((t) => !t.completed).length;
+    const completed = todos.filter((t) => t.completed).length;
 
   const filteredTodos = todos.filter((todo) => {
     if (filter === "ALL") {
@@ -60,8 +64,17 @@ const TodoContainer: FC<TodoContainerTypes> = ({ serverTodos }) => {
           TodoList
         </h1>
         <div className="space-y-4 sm:space-y-6">
+
+           {/* 새 할 일 입력 */}
           <TodoInput />
+
+{/* 할 일 상태 표시 */}
+          <TodoStatus remaining={remaining} completed={completed} />
+
+          {/* 필터 탭 */}
           <TodoFilterTap filter={filter} setFilter={setFilter} />
+
+          {/* 할 일 목록 */}
           <TodoList todos={filteredTodos} />
         </div>
       </div>
