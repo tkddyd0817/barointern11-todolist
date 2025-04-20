@@ -6,6 +6,9 @@ Next.js와 TypeScript를 활용한 할 일 관리 애플리케이션입니다.
 
 - ✅ Todo CRUD (Create, Read, Update, Delete) 작업
 - 🔄 완료 상태에 따른 필터링
+- 📊 실시간 Todo 통계 현황
+  - 남은 할 일 개수 표시
+  - 완료된 할 일 개수 표시
 - 📱 반응형 디자인 (모바일 & 데스크톱)
 - 🎯 TypeScript를 통한 타입 안전성
 - 🔄 React Query를 활용한 서버 상태 관리
@@ -42,101 +45,18 @@ yarn dev
 ## 🌟 주요 구현 사항
 
 ### 1. TypeScript 타입 안전성
-```typescript
-interface Todo {
-  id: string;
-  title: string;
-  completed: boolean;
-  date: string;
-}
-```
-
 ### 2. 서버 상태 관리 (React Query)
-```typescript
-// Prefetch 구현
-// app/page.tsx
-export default async function Homepage() {
-  const queryClient = new QueryClient();
-  
-  // 초기 데이터 프리페치
-  await queryClient.prefetchQuery({
-    queryKey: ['todos'],
-    queryFn: fetchTodos
-  });
-
-  return (
-    <HydrationBoundary state={dehydrate(queryClient)}>
-      <TodoClient />
-    </HydrationBoundary>
-  );
-}
-
-// TodoContainer.tsx
-export default function TodoContainer() {
-  const { data: todos } = useQuery({
-    queryKey: ['todos'],
-    queryFn: fetchTodos,
-    staleTime: 5 * 1000, // 5초 동안 데이터 신선도 유지
-  });
-}
-```
-
 ### 3. Prefetch & Hydration 전략
-```typescript
-// app/page.tsx
-export default async function HomePage() {
-  const queryClient = new QueryClient();
-  
-  // 초기 데이터 프리페치
-  await queryClient.prefetchQuery({
-    queryKey: ['todos'],
-    queryFn: fetchTodos
-  });
-
-  return (
-    <HydrationBoundary state={dehydrate(queryClient)}>
-      <TodoContainer />
-    </HydrationBoundary>
-  );
-}
-
-// TodoContainer.tsx
-export default function TodoContainer() {
-  const { data: todos } = useQuery({
-    queryKey: ['todos'],
-    queryFn: fetchTodos,
-    staleTime: 5 * 1000, // 5초 동안 데이터 신선도 유지
-  });
-}
-```
-
 ### 4. 최적화된 데이터 관리
-```typescript
-// Optimistic Updates with Prefetch
-const updateTodo = useMutation({
-  mutationFn: updateTodoItem,
-  onMutate: async (newTodo) => {
-    await queryClient.cancelQueries({ queryKey: ['todos'] });
-    
-    // 이전 상태 저장
-    const previousTodos = queryClient.getQueryData(['todos']);
-    
-    // 낙관적 업데이트
-    queryClient.setQueryData(['todos'], (old) => {...});
-    
-    return { previousTodos };
-  },
-});
-```
-
-이렇게 실제 구현된 내용에 맞게 수정하는 것이 더 정확할 것 같습니다! 👍
-
 ### 5. UI/UX 고려사항
 - 반응형 디자인 (모바일 320~420px, 데스크톱 1024px 이상)
 - 시맨틱 마크업
 - 로딩 상태 표시
 - 에러 처리 및 피드백
 - 접근성 고려
+### 6. Todo 통계 기능
+- 실시간 Todo 수 추적
+- 완료/미완료 항목 구분
 
 ## 📱 반응형 디자인
 
@@ -173,44 +93,76 @@ GET    /todos?completed=false   // 미완료 Todo
 - [O] 접근성 고려
 - [O] Prefetch를 통한 성능 최적화
 - [O] Hydration 전략 구현
+- [O] 실시간 Todo 통계 현황
 
 ## 📝 프로젝트 구조
 
-```
 src/
 ├── app/
-│   | 
-|   ├──layout.tsx
-│   └── page.tsx
+│ |
+| ├──layout.tsx
+│ └── page.tsx
 ├── components/
-│   ├── Loading.tsx
-│   ├── TodoContainer.tsx
-│   ├── TodoInput.tsx
-│   ├── TodoList.tsx
-│   ├── TodoItem.tsx
-│   └── TodoFilterTabs.tsx
+│ ├── Loading.tsx
+│ ├── TodoContainer.tsx
+│ ├── TodoInput.tsx
+│ ├── TodoList.tsx
+│ ├── TodoItem.tsx
+│ ├── TodoStatus.tsx
+│ └── TodoFilterTabs.tsx
 ├── hooks
-|   └──UseTodos.ts
+| └──UseTodos.ts
 |
 ├── api
-│   └── TodoApi.ts
+│ └── TodoApi.ts
 ├── lib/
-│   └── api.ts
+│ └── api.ts
 ├── providers
-|   └── TodoQueryProvider.tsx
-| 
+| └── TodoQueryProvider.tsx
+|
 └── types/
-    └── TodoTypes.ts
+└── TodoTypes.ts
+
+
+## 📝 Git 커밋 컨벤션
+
+커밋 메시지는 다음과 같은 형식을 따릅니다:
+```git commit -m "[Type]: [Subject]"```
+
+### 커밋 타입 (Type)
+| 타입 | 설명 |
+|------|------|
+| `feat` | 새로운 기능 추가, 기존 기능 수정/업데이트 |
+| `fix` | 버그 수정 |
+| `refactor` | 코드 리팩토링 |
+| `chore` | 빌드 업무 수정, 패키지 매니저 수정 등 잡일 |
+| `style` | CSS 등 사용자 UI 디자인 변경 |
+
+### 실제 커밋 메시지 예시
+```bash
+feat: 실시간 Todo 통계 현황기능추가
+feat: Todo 필터링 기능 구현
+feat: Todo CRUD 기능 구현
+style: Todo 컴포넌트 반응형 디자인 적용
+refactor: Todo 상태관리 로직 최적화
 ```
 
-## 🤝 기여 방법
+### 커밋 메시지 작성 규칙
+- 제목은 50자 이내로 작성
+- 직관적인 의미 전달을 위해 직관적인 내용을 작성
 
-1. 이 저장소를 포크합니다
-2. 새로운 브랜치를 생성합니다
-3. 변경사항을 커밋합니다
-4. 브랜치에 푸시합니다
-5. Pull Request를 생성합니다
 
-## 📜 라이센스
 
-이 프로젝트는 MIT 라이센스를 따릅니다.
+
+
+
+
+
+
+
+
+
+
+
+
+
