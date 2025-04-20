@@ -73,8 +73,8 @@ const TodoContainer: FC<TodoContainerTypes> = ({ serverTodos }) => {
 
           {/* 필터 탭 */}
           <TodoFilterTap filter={filter} setFilter={setFilter} />
-
-          {/* 할 일 목록 */}
+         
+           {/* 할 일 목록 */}
           <TodoList todos={filteredTodos} />
         </div>
       </div>
